@@ -39,5 +39,78 @@ class GameLogic
     # and planning on my part. I'm glad I got this one working now.
   end
 
+  def show_board(misguesses)
+    
+    # ____
+    # O   |
+    #/|\  |
+    # |   |
+    #/ \  |___
+
+    # puts "#{'_____' if misguesses >= 1}"
+    # puts "#{' O   |'}"
+    # puts "#{'/|\  |'}"
+    # puts "#{' |   |'}"
+    # puts "#{'/ \  |___'}"
+
+    if misguesses == 0
+      puts "#{'     '}"
+      puts "#{'     |'}"
+      puts "#{'     |'}"
+      puts "#{'     |'}"
+      puts "#{'     |___'}"
+    elsif misguesses == 1
+      puts "#{'_____'}"
+      puts "#{'     |'}"
+      puts "#{'     |'}"
+      puts "#{'     |'}"
+      puts "#{'     |___'}"
+
+    elsif misguesses == 2
+      puts "#{'_____'}"
+      puts "#{' O   |'}"
+      puts "#{'     |'}"
+      puts "#{'     |'}"
+      puts "#{'     |___'}"
+    elsif misguesses == 3
+      puts "#{'_____'}"
+      puts "#{' O   |'}"
+      puts "#{' |   |'}"
+      puts "#{'     |'}"
+      puts "#{'     |___'}"
+    elsif misguesses == 4
+      puts "#{'_____'}"
+      puts "#{' O   |'}"
+      puts "#{'/|   |'}"
+      puts "#{'     |'}"
+      puts "#{'     |___'}"
+    elsif misguesses == 5
+      puts "#{'_____'}"
+      puts "#{' O   |'}"
+      puts "#{'/|\  |'}"
+      puts "#{'     |'}"
+      puts "#{'     |___'}"
+    elsif misguesses == 6
+      puts "#{'_____'}"
+      puts "#{' O   |'}"
+      puts "#{'/|\  |'}"
+      puts "#{' |   |'}"
+      puts "#{'     |___'}"
+    elsif misguesses == 7
+      puts "#{'_____'}"
+      puts "#{' O   |'}"
+      puts "#{'/|\  |'}"
+      puts "#{' |   |'}"
+      puts "#{'/    |___'}"
+    elsif misguesses == 8
+      puts "#{'_____'}"
+      puts "#{' O   |'}"
+      puts "#{'/|\  |'}"
+      puts "#{' |   |'}"
+      puts "#{'/ \  |___'}"
+    end    
+
+  end
+
 
 end
