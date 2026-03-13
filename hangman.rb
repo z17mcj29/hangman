@@ -12,13 +12,6 @@ testword = gl.retrieve_word
 puts testword
 gs.hidden_word = testword
 puts gs.hidden_word
-gl.show_board(0)
-gl.show_board(1)
-gl.show_board(2)
-gl.show_board(3)
-gl.show_board(4)
-gl.show_board(5)
-gl.show_board(6)
-gl.show_board(7)
-gl.show_board(8)
+gl.show_board(gs.misses)
+
 

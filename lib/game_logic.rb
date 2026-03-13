@@ -112,5 +112,17 @@ class GameLogic
 
   end
 
+  def valid_input
+
+    input = nil
+
+    loop do
+      puts "Enter your selection!"
+      input = gets.chomp.upcase
+      break input if input.match?(/[A-Z]/) && input.size == 1
+    end
+
+
+  end
 
 end

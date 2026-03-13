@@ -1,0 +1,52 @@
+Instead of writing my notes in comments I will make them here in a text file.
+
+These game programs are always a bit more tricky than they look on the surface.
+I am going to write out what I have done so far and then create a logic path
+for me to continue.
+
+Complete:
+  Able to retrieve a random word of proper size from the dictionary. Have created
+  a GameState variable called hidden_word that I will store that word in. I am going
+  to save all of my variables in game in a GameState object that I can serialize for
+  saving and restoring game points later on.
+
+  I built the hangman ascii text. It has 9 different views starting from the initial
+  showing the post, then 8 stages from rope to building out the body. I have a variable
+  in my GameState called misses which stores an integer starting at 0 and will go up to
+  8. This misses variable is sent directly into the show_board method to print the
+  proper hangman view.
+
+What I need to do:
+  I need to develop a game flow. The added problem I have to think about is the ability
+  to load and save with every turn.
+
+  My per turn game flow should go like this.
+  Ask if they want to save.
+  Show them the current state of the game.
+  Show them the hangman ascii
+  Show the hidden_word with blank text and words filled in where they were correct "**e**r"
+  Show another line of text below or besides the hidden word that shows the letters
+  that have been guessed "A, V, R"
+  Let them enter a guess
+  run logic to update the game. Repeat the loop or let them know win/loss
+
+  I believe this logic loop will allow me to just jump into the game flow on a save
+  by ignoring the first line which asks them to save and continue down with the 
+  serialized object being able to fit into the rest of the program.
+
+  I am going to build this without the save load feature first, then add after. I just
+  wanted to make sure my game flow worked with those features.
+
+Brainstorming: Been a few hours since I wrote the above and I have been thinking
+of how to update the hidden word each cycle. Here is the idea I have come up with.
+Writing it here and will try to implement it tomorrow.
+Have a for_each statement go over the hidden_word. If the current letter is found
+in the guesses array then I will have a solution array[] that will send that current
+letter to. So if it's true solution_array << current_iteration. If it isn't found in
+the guesses[] I will have it send solution_array << * instead. This will always send
+the correct number of *'s at the start and should be good to work with when I do the
+save and load feature.
+Every time the player enters a guess I will validate the entry to see if it is in the
+secret word, if it isn't I will increment the misses by 1. If it gets to 8 misses the 
+game will be over, else if they solve it first they win and I will have finishing text
+for both scenarios.
