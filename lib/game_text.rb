@@ -1,5 +1,3 @@
-d ..
-
 class GameText
 
   def welcome_to_hangman
@@ -10,6 +8,24 @@ class GameText
   def select_mode
     puts "Please select your mode. You can start a new game by pressing 'S'"
     puts "Or continue a saved game (if you have one) by pressing 'C'"
-  end 
+  end
+
+  def enter_selection
+    puts "Please enter your selection"
+  end
+
+  def hidden_word(word, chosen_words)
+    final_word = ''
+    words = word.split("")
+    word.each_with_index do |char, i|
+    if char = chosen_words[i]
+      final_word[i] = char
+    else
+      final_word[i] = '_'
+    end
+  end
+
+    puts final_word
+  end
 
 end
