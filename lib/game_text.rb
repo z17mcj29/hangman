@@ -14,18 +14,19 @@ class GameText
     puts "Please enter your selection"
   end
 
-  def hidden_word(word, chosen_words)
-    final_word = ''
-    words = word.split("")
-    word.each_with_index do |char, i|
-    if char = chosen_words[i]
-      final_word[i] = char
-    else
-      final_word[i] = '_'
+  def hidden_word(secret_word, chosen_chars)
+    output_word = " "
+    chos_chars = chosen_chars.join
+    secret_word.each_char.with_index do |word, i|
+      if chos_chars.include?(word)
+        output_word[i] = word
+        output_word
+      else
+        output_word[i] = "_"
+        output_word
+      end
     end
-  end
-
-    puts final_word
+    output_word
   end
 
 end
