@@ -21,24 +21,29 @@ require_relative './lib/game_text'
 gl = GameLogic.new
 gt = GameText.new
 game_over = false
+temp_value = ' '
 #gs = GameState.new
-gs = {hidden_word: 'fireman', guesses: 0, misses: 0, chosen_chars: ["i", "n", "l"]}
+gs = {hidden_word: '', guesses: 0, misses: 0, chosen_chars: []}
 
 
 #set up game variables
-#gs[:hidden_word] = gl.retrieve_word
+gs[:hidden_word] = gl.retrieve_word
 puts gs[:hidden_word]
 #run game loop
 if !game_over
   #game loop
   loop do
       gt.enter_selection
-      puts gt.hidden_word(gs[:hidden_word], gs[:chosen_chars])
-      gl.show_board(gs[:guesses])
-      game_over = true 
+      puts gl.hidden_word(gs[:hidden_word], gs[:chosen_chars])
+      gl.show_board(gs[:misses])
+      temp_value = gl.valid_input
+      puts temp_value
+      gl.update_game_state(gs, temp_value)
+      puts gs[:misses]
+      game_over = gl.check_game_over(gs, game_over)
+      #game_over = true 
     break if game_over
   end
-else
-  #end game logic
 end
-
+  gl.show_board(gs[:misses])
+  gl.end_game(gs)

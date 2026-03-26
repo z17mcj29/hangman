@@ -1,3 +1,4 @@
+
 class GameLogic
 
   def retrieve_word
@@ -28,7 +29,7 @@ class GameLogic
     end
 
     #return words_array.include?("expansys")
-    random_word = words_array.sample # It's crazy how many ways Ruby has to do things. I've never heard of sample before researching for this.
+    random_word = words_array.sample.chomp # It's crazy how many ways Ruby has to do things. I've never heard of sample before researching for this.
     return random_word
 
     # I know this didn't turn out to be anything like I wrote before building the method
@@ -118,10 +119,45 @@ class GameLogic
 
     loop do
       puts "Enter your selection!"
-      input = gets.chomp.upcase
-      break input if input.match?(/[A-Z]/) && input.size == 1
+      input = gets.chomp.downcase
+      break input if input.match?(/[a-z]/) && input.size == 1
     end
 
+
+  end
+
+  def update_game_state(gs, input_char)
+    gs[:misses] += 1 unless gs[:hidden_word].include?(input_char)
+    gs[:chosen_chars] << input_char
+  end
+  
+  def hidden_word(secret_word, chosen_chars)
+    output_word = " "
+    chos_chars = chosen_chars.join
+    secret_word.each_char.with_index do |word, i|
+      if chos_chars.include?(word)
+        output_word[i] = word
+        output_word
+      else
+        output_word[i] = "_"
+        output_word
+      end
+    end
+    output_word
+  end
+
+  def check_game_over(gs, game_over)
+    game_over = true if gs[:misses] == 8
+    game_over = true unless hidden_word(gs[:hidden_word], gs[:chosen_chars]).include?("_")
+    game_over
+  end
+
+  def end_game(gs)
+    if gs[:misses] < 8
+      puts "Congratulations, you win!"
+    else
+      puts "You lost! Please try again"
+    end
 
   end
 
