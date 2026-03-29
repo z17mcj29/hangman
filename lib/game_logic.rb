@@ -126,6 +126,17 @@ class GameLogic
 
   end
 
+  def begin_game_input
+    
+    input = nil
+
+    loop do
+      puts "Enter your Selection! S to start! C to continue!"
+      input = gets.chomp.downcase
+      break input if input.match?(/[s,c]/) && input.size == 1
+    end
+  end
+
   def update_game_state(gs, input_char)
     gs[:misses] += 1 unless gs[:hidden_word].include?(input_char)
     gs[:chosen_chars] << input_char
@@ -159,6 +170,11 @@ class GameLogic
       puts "You lost! Please try again"
     end
 
+  end
+
+  def game_state_reset(gs)
+    gs = {hidden_word: ' ', misses: 0, chosen_chars: [], game_over: false}
+    gs
   end
 
 end
