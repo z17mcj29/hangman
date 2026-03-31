@@ -122,8 +122,6 @@ class GameLogic
       input = gets.chomp.downcase
       break input if input.match?(/[a-z]/) && input.size == 1
     end
-
-
   end
 
   def begin_game_input
@@ -135,6 +133,33 @@ class GameLogic
       input = gets.chomp.downcase
       break input if input.match?(/[s,c]/) && input.size == 1
     end
+  end
+
+  def save_load_game_input
+
+    input = nil
+
+    loop do
+      puts "Would you like to Save or Continue from Saved?"
+      puts "Press 1 to save!"
+      puts "Press 2 to load!"
+      puts "Press C to continue "
+      input = gets.chomp.downcase
+      break input if input.match?(/[1,2,c]/) && input.size == 1
+    end
+    
+  end
+
+  def save_load_game(gs)
+    results = ''
+    results = save_load_game_input
+    puts results
+    if results == "1"
+      File.open("gamestate.txt", "w") { |f| f.write(Marshal.dump(gs))}
+    elsif results == "2"
+      gs = Marshal.load(File.read("gamestate.txt"))
+    end
+    gs
   end
 
   def update_game_state(gs, input_char)
@@ -157,7 +182,8 @@ class GameLogic
     output_word
   end
 
-  def check_game_over(gs, game_over)
+  def check_game_over(gs)
+    game_over = false
     game_over = true if gs[:misses] == 8
     game_over = true unless hidden_word(gs[:hidden_word], gs[:chosen_chars]).include?("_")
     game_over
